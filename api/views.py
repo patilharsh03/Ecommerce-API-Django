@@ -25,13 +25,13 @@ def showAll(request):
     serializer = ProductSerializer(products, many=True)
     return Response(serializer.data)
 
-@api_view(['GET'])  #GET a single product
+@api_view(['GET'])    #GET a single product
 def viewProduct(request,pk):
     product = Product.objects.get(id=pk)
     serializer = ProductSerializer(product, many=False)
     return Response(serializer.data)
 
-@api_view(['POST']) #Create a New Product
+@api_view(['POST'])   #Create a New Product
 def createProduct(request):
     serializer = ProductSerializer(data=request.data)
     if serializer.is_valid():
@@ -39,7 +39,7 @@ def createProduct(request):
 
     return Response(serializer.data)
 
-@api_view(['POST'])
+@api_view(['POST'])    #Update a product
 def updateProduct(request, pk):
     product = Product.objects.get(id=pk)
     serializer = ProductSerializer(instance=product, data=request.data)
@@ -48,7 +48,7 @@ def updateProduct(request, pk):
 
     return Response(serializer.data)   
 
-@api_view(['GET'])
+@api_view(['GET'])     #Delete a product
 def deleteProduct(request, pk):
     product = Product.objects.get(id=pk)
     product.delete()
